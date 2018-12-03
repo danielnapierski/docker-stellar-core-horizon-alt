@@ -1,9 +1,10 @@
-FROM stellar/base:latest
+FROM onfo/stellar-onfo:base
 
-MAINTAINER Bartek Nowotarski <bartek@stellar.org>
+MAINTAINER Ivan Voras (ONFO) <ivan.voras@toptal.com>
 
 ENV STELLAR_CORE_VERSION 10.0.0-685-1fc018b4
 ENV HORIZON_VERSION 0.15-onfo-dev
+ENV DEBIAN_FRONTEND noninteractive
 
 EXPOSE 5432
 EXPOSE 8000
