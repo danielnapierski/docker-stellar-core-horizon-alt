@@ -17,4 +17,11 @@ mv /horizon-v${HORIZON_VERSION}-linux-amd64/horizon /usr/local/bin
 chmod +x /usr/local/bin/horizon
 rm -rf horizon.tar.gz /horizon-v${HORIZON_VERSION}-linux-amd64
 
-echo "\nDone installing stellar-core and horizon...\n"
+# friendbot
+wget -O friendbot.tar.gz https://github.com/danielnapierski/go-alt/releases/download/horizon-v0.15-onfo-dev/friendbot.tar.gz
+tar -zxvf friendbot.tar.gz
+mv friendbot /usr/local/bin/
+mkdir -p /opt/stellar/friendbot/etc
+mv friendbot.cfg /opt/stellar/friendbot/etc
+
+echo "\nDone installing stellar-core, friendbot and horizon...\n"

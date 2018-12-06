@@ -20,7 +20,7 @@ This procedure was created on Ubuntu 18.04.
  * Clone https://github.com/danielnapierski/packages
  * Clone https://github.com/danielnapierski/stellar-core-alt
  * Copy the `debian` folder from the packages/stellar-core folder into the stellar-core-alt folder
- * Change the `control` and `changelog` files in the `debian` folder. Be sure to change the maintainer name and e-mail address in both. Take not of the version number which is recorded in the changelog file, this will be the package version.
+ * Change the `control` and `changelog` files in the `debian` folder. Be sure to change the maintainer name and e-mail address in both. Take note of the version number which is recorded in the changelog file, this will be the package version.
  * Create a GPG key with those exact name and e-mail. Make sure the key is loaded into the GPG agent.
  * Run `dpkg-buildpackage -b`
 
