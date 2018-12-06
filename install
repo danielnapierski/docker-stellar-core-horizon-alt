@@ -24,4 +24,6 @@ mv friendbot /usr/local/bin/
 mkdir -p /opt/stellar/friendbot/etc
 mv friendbot.cfg /opt/stellar/friendbot/etc
 
-echo "\nDone installing stellar-core, friendbot and horizon...\n"
+echo ""
+echo "Done installing stellar-core, friendbot and horizon..."
+echo ""
