@@ -16,12 +16,25 @@ This procedure was created on Ubuntu 18.04.
    * pandoc
    * perl
    * dpkg-dev
+   * libc++-dev
+   * libc++abi-dev
+   * devscripts
+   * dh-systemd
+   * libpq-dev
+   * libsodium-dev
  * Link /usr/bin/clang to /usr/local/bin/clang
  * Clone https://github.com/danielnapierski/packages
  * Clone https://github.com/danielnapierski/stellar-core-alt
  * Copy the `debian` folder from the packages/stellar-core folder into the stellar-core-alt folder
  * Change the `control` and `changelog` files in the `debian` folder. Be sure to change the maintainer name and e-mail address in both. Take note of the version number which is recorded in the changelog file, this will be the package version.
  * Create a GPG key with those exact name and e-mail. Make sure the key is loaded into the GPG agent.
+   * gpg --gen-key
+     * Real name: ONFO Package Builder
+     * Email: onfo@onfo.com
+   * If gpg hangs, RNG entropy probably needs to be increased. This can be done by installing `rng-tools`.
+   * Whatever data is entered for the PGP key data also needs to be included verbatim in the `changelog` and `control` files, in the format "ONFO Package Builder <onfo@onfo.com>". It must be formatted exactly like that.
+   * If the PGP key is protected by a password, gpg-agent should be configured to cache keys, as described here: https://wiki.archlinux.org/index.php/GnuPG#gpg-agent , and the key should be pre-added by encrypting a message to yourself, as described here: https://www.digitalocean.com/community/tutorials/how-to-use-gpg-to-encrypt-and-sign-messages
+ * Run `./autogen.sh`
  * Run `dpkg-buildpackage -b`
 
 ## #2 Upload the Debian package to GitHub or some other public storage
