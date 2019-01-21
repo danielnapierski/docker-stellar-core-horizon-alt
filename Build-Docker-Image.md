@@ -44,12 +44,12 @@ The Docker image build process fetches the Debian package and installs it into t
  1. Go to the https://github.com/danielnapierski/stellar-core-alt repository
  2. Click on the "Releases" link (usually shown with the number of releases available, e.g. "36 Releases")
  3. Choose if you want to update an existing release - which is useful (easier) during development, or create a new one. This also influences (and is influenced by) step 6 from the package build process described above.
-   * If you want to replace the package file in an existing release (usually the latest one), and the Debian package was built with the same version number, click the Edit button near the release title, delete the current package file (by clicking on the X in the list of files below the description), and upload a new one, making sure it has the same filename.
-   * If you want to create a new release, with a new version number:
-     1. Click on the "Draft a new release" button
-     2. As the tag version enter the exact same version number as the version of the package you'll be uploading, e.g. "v0.1-2"
-     3. Upload the Debian package file (named e.g. `stellar-core-onfo_0.1-2_amd64.deb`)
-     4. Modify the `install` file in this repository to fetch the new package file (the `wget` line near the start of the script)
+    * If you want to replace the package file in an existing release (usually the latest one), and the Debian package was built with the same version number, click the Edit button near the release title, delete the current package file (by clicking on the X in the list of files below the description), and upload a new one, making sure it has the same filename.
+    * If you want to create a new release, with a new version number:
+      1. Click on the "Draft a new release" button
+      2. As the tag version enter the exact same version number as the version of the package you'll be uploading, e.g. "v0.1-2"
+      3. Upload the Debian package file (named e.g. `stellar-core-onfo_0.1-2_amd64.deb`)
+      4. Modify the `install` file in this repository to fetch the new package file (the `wget` line near the start of the script)
 
 ## #3 Build a Docker image
 
