@@ -5,23 +5,23 @@ This procedure was created on Ubuntu 18.04.
 ## #1: Building the Debian package
 
  1. Install the following build dependancy packages:
-   * clang
-   * build-essential
-   * pkg-config
-   * automake
-   * autoconf
-   * libutil
-   * bison
-   * flex
-   * pandoc
-   * perl
-   * dpkg-dev
-   * libc++-dev
-   * libc++abi-dev
-   * devscripts
-   * dh-systemd
-   * libpq-dev
-   * libsodium-dev
+    * clang
+    * build-essential
+    * pkg-config
+    * automake
+    * autoconf
+    * libutil
+    * bison
+    * flex
+    * pandoc
+    * perl
+    * dpkg-dev
+    * libc++-dev
+    * libc++abi-dev
+    * devscripts
+    * dh-systemd
+    * libpq-dev
+    * libsodium-dev
  2. Link /usr/bin/clang to /usr/local/bin/clang
  3. Clone https://github.com/danielnapierski/packages
  4. Clone https://github.com/danielnapierski/stellar-core-alt
@@ -53,6 +53,7 @@ The Docker image build process fetches the Debian package and installs it into t
 
 ## #3 Build a Docker image
 
+ * [Install](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04) the latest version of Docker
  * Check out https://github.com/danielnapierski/docker-stellar-core-horizon-alt
  * Change the maintainer field in the Dockerfile
  * Change the `install` file to point to the correct Debian package URL for Stellar and the archive URL for Horizon
