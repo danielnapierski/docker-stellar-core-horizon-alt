@@ -53,7 +53,7 @@ The Docker image build process fetches the Debian package and installs it into t
 
 ## #3 Build a Docker image
 
- * [Install](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04) the latest version of Docker
+ * [Install](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04) the latest version of Docker and add the user doing the builds to the `docker` group
  * Check out https://github.com/danielnapierski/docker-stellar-core-horizon-alt
  * Change the maintainer field in the Dockerfile
  * Change the `install` file to point to the correct Debian package URL for Stellar and the archive URL for Horizon
