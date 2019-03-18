@@ -36,13 +36,22 @@ Change to the tf/ directory.
 
 `$ cd ./tf/`
 
-_***TODO*** setup vars_
+***Note:*** There are many ways that variables could be configured.  This is one approach.  We will set environment variables using the prefix TF_VAR_ that will be read and replaced by terraform.  See ./tf/observer.tf for details.  Below we will set values that must match resources already configured in your AWS environment, specifically a keypair and security group.  The security group must allow for remote access by SSH.
 
-Edit observer.tf to have correct key_name and security_groups for AWS
 
-Specify both an ami instance and region.  Ami instances are specific to a region, so be sure to chose an ami available on the region you specify.
+`$ export TF_VAR_ssh_key_name="yourkeyname"`
 
-`$ cat ./observer.tf`
+
+`$ export TF_VAR_security_group="yourgroupname"`
+
+
+We also need to specify both an ami instance and region.  Ami instances are specific to a region, so be sure to chose an ami available on the region you specify.  We use default values if these options are not specified.
+
+`$ export TF_VAR_region="yourregion"`
+
+`$ export TF_VAR_ami="yourami"`
+
+`$ export TF_VAR_instance_type="yourinstancetype"`
 
 Initialize terraform.
 
