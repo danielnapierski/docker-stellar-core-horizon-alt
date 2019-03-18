@@ -79,15 +79,19 @@ Inspect the full dns name of this resource.
 
 Export variables.
 
-`$ export ONFO_OBS_NODE_DNS=` [copy&paste]
+`$ export ONFO_OBS_NODE_DNS=$(terraform show | grep 'public_dns' | sed 's/^.*= //')`
 
-`$ export ONFO_OBS_NODE_USER='ec2-user'`
+Confirm the value is set.
+
+`$ echo $ONFO_OBS_NODE_DNS`
+
+Set the username for connecting.
+
+`$ export ONFO_OBS_NODE_USER="ec2-user"`
 
 Test an ssh connection to the resource.
 
-NEED TO FIX FORMATTING/STRING CONCAT
-
-`$ ssh -i $ONFO_SSH_KEY $ONFO_OBS_NODE_USER'@'$ONFO_OBS_NODE_DNS`
+`$ ssh -i ${ONFO_OBS_NODE_SSH_KEY} ${ONFO_OBS_NODE_USER}'@'${ONFO_OBS_NODE_DNS}`
 
 
 ### Inventory
@@ -96,7 +100,12 @@ Change to the directory containing hosts.ini and observer.yaml.
 
 `cd ../`
 
-Edit hosts.ini.  Or use the results from terraform show generate the contents.
+Edit hosts.ini to match your inventory.  Or use the results from terraform show generate the contents, as shown below.
+
+`echo "[observer_nodes]" >> hosts.ini; echo $ONFO_OBS_NODE_DNS >> hosts.ini`
+
+`cat hosts.ini`
+
 
 ### Ansible
 
