@@ -46,8 +46,3 @@
         - "11626:11626"
 
 # $ ansible-playbook -i hosts.ini --private-key=/Users/danielnapierski/github/onfo/OnfoDevOpsKeyPair.pem -u ec2-user observer.yaml
-
-# ssh -i "OnfoDevOpsKeyPair.pem" ec2-user@ec2-18-191-175-166.us-east-2.compute.amazonaws.com
-# ssh -i private_key username@[hosts]
-# ansible masters -m shell -a "pwd" --private-key=/home/ec2-user/openshift-aws-installer-image/ck_workshop.pem -u ec2-user
-#ansible observer_nodes -m shell -a "pwd" -i hosts.ini --private-key=/Users/danielnapierski/github/onfo/OnfoDevOpsKeyPair.pem -u ec2-user
