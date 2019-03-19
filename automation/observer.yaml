@@ -29,7 +29,18 @@
       name: onfo/onfo-stellar-horizon
 
 # copy a correct config to this machine
+  - name: copy config
+    copy:
+      src: ./observer.cfg
+      dest: /home/ec2-user/observer.cfg
+      #owner: foo
+      #group: foo
+      #mode: 0644
+
+# copy dockerfile
 # make a new docker image using the custom config
+# docker build -f Dockerfile.observer -t observernode .
+# use the newly created observernode image
 
   - name: Restart a Onfo container
     docker_container:
