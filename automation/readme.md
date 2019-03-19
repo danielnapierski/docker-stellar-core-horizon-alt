@@ -77,7 +77,7 @@ Inspect the full dns name of this resource.
 
 `$ terraform show | grep 'public_dns'`
 
-Export variables.
+Read the public DNS address and store it as an environment variable.
 
 `$ export ONFO_OBS_NODE_DNS=$(terraform show | grep 'public_dns' | sed 's/^.*= //')`
 
@@ -93,6 +93,12 @@ Test an ssh connection to the resource.
 
 `$ ssh -i ${ONFO_OBS_NODE_SSH_KEY} ${ONFO_OBS_NODE_USER}'@'${ONFO_OBS_NODE_DNS}`
 
+    # Within an SSH terminal session confirm infrastructure details using AWS commands.
+
+    $ ec2-metadata
+    # Results...
+
+    $ exit
 
 ### Inventory
 
@@ -100,9 +106,9 @@ Change to the directory containing hosts.ini and observer.yaml.
 
 `cd ../`
 
-Edit hosts.ini to match your inventory.  Or use the results from terraform show generate the contents, as shown below.
+Edit hosts.ini to match your inventory.  Or use the results from `terraform show`, parsed and stored as `$ONFO_OBS_NODE_DNS`, to generate the contents, as shown below.
 
-`echo "[observer_nodes]" >> hosts.ini; echo $ONFO_OBS_NODE_DNS >> hosts.ini`
+`rm ./hosts.ini; echo "[observer_nodes]" >> hosts.ini; echo $ONFO_OBS_NODE_DNS >> hosts.ini`
 
 `cat hosts.ini`
 

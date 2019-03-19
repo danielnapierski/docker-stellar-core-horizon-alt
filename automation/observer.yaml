@@ -9,6 +9,11 @@
     user_name: ec2-user
 
   tasks:
+  - name: 'yum upgrade all packages'
+    yum:
+      name: '*'
+      state: latest
+
   - name: yum install docker
     yum: name=docker state=latest
 
