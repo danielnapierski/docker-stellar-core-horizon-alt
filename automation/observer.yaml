@@ -33,19 +33,37 @@
     copy:
       src: ./observer.cfg
       dest: /home/ec2-user/observer.cfg
-      #owner: foo
+      owner: ec2-user
       #group: foo
       #mode: 0644
 
-# copy dockerfile
-# make a new docker image using the custom config
+# copy Dockerfile to this machine
+  - name: copy Dockerfile
+    copy:
+      src: ./Dockerfile.observer
+      dest: /home/ec2-user/Dockerfile.observer
+      owner: ec2-user
+      #group: foo
+      #mode: 0644
+
+# build a new docker image using the custom config
+  - name: make observernode image in docker
+    docker_image:
+      name: observernode
+      pull: no
+      state: present
+      path: /home/ec2-user/
+      dockerfile: /home/ec2-user/Dockerfile.observer
+
 # docker build -f Dockerfile.observer -t observernode .
 # use the newly created observernode image
 
   - name: Restart a Onfo container
     docker_container:
       name: OnfoObserver
-      image: onfo/onfo-stellar-horizon
+# use custom image
+      image: observernode
+#      image: onfo/onfo-stellar-horizon
       command: --standalone
       state: started
       restart: yes

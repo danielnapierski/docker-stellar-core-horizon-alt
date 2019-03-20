@@ -1,0 +1,7 @@
+FROM onfo/onfo-stellar-horizon:latest
+
+MAINTAINER Dan Napierski (ONFO) <dan.napierski@toptal.com>
+
+COPY observer.cfg /opt/stellar-default/standalone/core/etc/stellar-core.cfg
+
+ENTRYPOINT ["/init", "--", "/start" ]
