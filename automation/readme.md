@@ -106,7 +106,8 @@ The following command will run the observer.yaml playbook against the inventory 
 
 Once this playbook completes you should your observer node up and running at:
 
-    $ wget ${ONFO_OBS_NODE_DNS}':11626/info'
+    $ wget 'http://'${ONFO_OBS_NODE_DNS}':11626/info'
+    $ open 'http://'${ONFO_OBS_NODE_DNS}':11626/info'
 
 # DRAFT - more to compute
 ### Configure database and s3

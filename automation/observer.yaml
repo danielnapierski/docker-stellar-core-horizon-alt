@@ -74,4 +74,4 @@
         - "11625:11625"
         - "11626:11626"
 
-# $ ansible-playbook -i hosts.ini --private-key=/Users/danielnapierski/github/onfo/OnfoDevOpsKeyPair.pem -u ec2-user observer.yaml
+# $ ansible-playbook -i hosts.ini --private-key=$ONFO_OBS_NODE_SSH_KEY -u $ONFO_OBS_NODE_USER observer.yaml
