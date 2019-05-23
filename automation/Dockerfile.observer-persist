@@ -1,0 +1,22 @@
+FROM onfo/onfo-stellar-horizon:latest
+
+ARG AWS_ACCESS_KEY_ID
+ARG AWS_SECRET_ACCESS_KEY
+ARG AWS_REGION=us-east-2
+
+ENV AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+ENV AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+ENV AWS_REGION=$AWS_REGION
+
+MAINTAINER Dan Napierski (ONFO) <dan.napierski@toptal.com>
+
+COPY observer-persist.cfg /opt/stellar-default/standalone/core/etc/stellar-core.cfg
+
+#COPY cred.txt /cred.txt
+#RUN pip install awscli
+
+RUN apt update
+RUN apt install --yes --force-yes python3-pip
+RUN pip3 install awscli
+
+ENTRYPOINT ["/init", "--", "/start" ]

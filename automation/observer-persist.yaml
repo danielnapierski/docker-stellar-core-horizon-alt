@@ -1,0 +1,87 @@
+---
+- name: install and start onfo
+  hosts: observer_persist_nodes
+  become: true
+
+  vars:
+# These are not used, yet:
+    private_key: OnfoDevOpsKeyPair.pem
+    user_name: ec2-user
+
+  tasks:
+  - name: 'yum upgrade all packages'
+    yum:
+      name: '*'
+      state: latest
+
+  - name: yum install docker
+    yum: name=docker state=latest
+
+  - name: start docker
+    service: name=docker state=started
+
+  - name: pip install docker-py
+    pip:
+      name: docker-py
+
+  - name: pull onfo image from dockerhub
+    docker_image:
+      name: onfo/onfo-stellar-horizon
+
+# copy a correct config to this machine
+  - name: copy config
+    copy:
+      src: ./observer-persist.cfg
+      dest: /home/ec2-user/observer-persist.cfg
+      owner: ec2-user
+      #group: foo
+      #mode: 0644
+
+# copy Dockerfile to this machine
+  - name: copy Dockerfile
+    copy:
+      src: ./Dockerfile.observer-persist
+      dest: /home/ec2-user/Dockerfile.observer-persist
+      owner: ec2-user
+      #group: foo
+      #mode: 0644
+
+# copy credentials to this machine
+  - name: copy credentials
+    copy: 
+      src: ./cred.txt
+      dest: /home/ec2-user/cred.txt
+      owner: ec2-user
+
+# build a new docker image using the custom config
+  - name: make observerpersistnode image in docker
+    docker_image:
+      name: observerpersistnode
+      pull: no
+      state: present
+      path: /home/ec2-user/
+      dockerfile: /home/ec2-user/Dockerfile.observer-persist
+      buildargs:
+        AWS_ACCESS_KEY_ID="TODOPUTIDHEREORREADFROMENV"        
+        AWS_SECRET_ACCESS_KEY="TODOPUTKEYHEREORREADFROMENV"
+
+# docker build -f Dockerfile.observer -t observernode .
+# use the newly created observernode image
+
+  - name: Restart a Onfo container
+    docker_container:
+      name: OnfoPersistObserver
+# use custom image
+      image: observerpersistnode
+#      image: onfo/onfo-stellar-horizon
+      command: --standalone
+      state: started
+      restart: yes
+#    devices:
+#     - "/dev/sda:/dev/xvda:rwm"
+      ports:
+        - "8000:8000"
+        - "11625:11625"
+        - "11626:11626"
+
+# $ ansible-playbook -i hosts.ini --private-key=$ONFO_OBS_NODE_SSH_KEY -u $ONFO_OBS_NODE_USER observer.yaml
